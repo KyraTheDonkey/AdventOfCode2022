@@ -1,3 +1,12 @@
+use std::env;
+use std::fs;
+
 fn main() {
-    println!("Hello, world!");
+    let args: Vec<String> = env::args().collect();
+
+    let input_path = &args[1];
+    let input = fs::read_to_string(input_path).expect("Expected to read the file");
+    
+    let answer = day1::run(&input);
+    println!("{}", answer);
 }
