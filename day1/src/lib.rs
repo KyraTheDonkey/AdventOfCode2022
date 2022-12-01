@@ -1,10 +1,8 @@
-use std::cmp::Ordering;
-
-pub fn run(input: &String) -> u64 {
+pub fn run(input: &String) -> (u64, u64, u64) {
     // Splits each elf into a chunk
     let split_input = input.split("\n\n");
 
-    let mut highest: u64 = u64::MIN;
+    let mut entries: Vec<u64> = Vec::new();
     for elf in split_input {
         let mut current_total: u64 = 0;
 
@@ -17,15 +15,8 @@ pub fn run(input: &String) -> u64 {
             };
             current_total += calories;
         }
-        match current_total.cmp(&highest) {
-            Ordering::Equal => println!("{} equaled {}", current_total, highest),
-            Ordering::Greater => {
-                highest = current_total;
-                println!("{} was greater than {}", current_total, highest)
-            },
-            Ordering::Less => println!("{} was less than {}", current_total, highest)
-        }
+        entries.insert(0, current_total);
     }
-
-    return highest;
+    entries.sort_unstable_by(|a, b| b.cmp(a));
+    (entries[0], entries[1], entries[2])
 }
