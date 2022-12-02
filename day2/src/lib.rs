@@ -2,30 +2,27 @@ pub fn run(input: &String, part: i32) -> i64 {
     let mut score: i64 = 0;
 
     let games = input.split("\n");
+    let calc_score: CalcScore;
     match part {
         1 => {
-            for game in games {
-                let mut parse = game.chars();
-                let opp_move = parse.nth(0).expect("Should get an opponent's move");
-                let my_move = parse.nth(1).expect("Should get my move");
-                score += calc_score(&opp_move, &my_move);
-            }
+            calc_score = calc_score_p1;
         },
         2 => {
-            for game in games {
-                let mut parse = game.chars();
-                let opp_move = parse.nth(0).expect("Should get an opponent's move");
-                let my_result = parse.nth(1).expect("Should get my result");
-                score += calc_score_p2(&opp_move, &my_result);
-            }
+            calc_score = calc_score_p2;
         },
-        _ => score = -1,
+        _ => panic!("Didn't get a valid part number"),
+    }
+    for game in games {
+        let mut parse = game.chars();
+        let opp_move = parse.nth(0).expect("Should get an opponent's move");
+        let my_move = parse.nth(1).expect("Should get my move");
+        score += calc_score(&opp_move, &my_move);
     }
     return score;
     
 }
 
-fn calc_score(opp_move: &char, my_move: &char) -> i64 {
+fn calc_score_p1(opp_move: &char, my_move: &char) -> i64 {
     match opp_move {
         // Rock
         'A' => match my_move {
@@ -83,3 +80,4 @@ fn calc_score_p2(opp_move: &char, my_result: &char) -> i64 {
     }
 }
 
+type CalcScore = fn(&char, &char) -> i64;
