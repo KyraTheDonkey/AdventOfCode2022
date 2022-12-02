@@ -4,12 +4,8 @@ pub fn run(input: &String, part: i32) -> i64 {
     let games = input.split("\n");
     let calc_score: CalcScore;
     match part {
-        1 => {
-            calc_score = calc_score_p1;
-        },
-        2 => {
-            calc_score = calc_score_p2;
-        },
+        1 => calc_score = calc_score_p1,
+        2 => calc_score = calc_score_p2,
         _ => panic!("Didn't get a valid part number"),
     }
     for game in games {
@@ -19,7 +15,6 @@ pub fn run(input: &String, part: i32) -> i64 {
         score += calc_score(&opp_move, &my_move);
     }
     return score;
-    
 }
 
 fn calc_score_p1(opp_move: &char, my_move: &char) -> i64 {
