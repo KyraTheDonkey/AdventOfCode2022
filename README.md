@@ -46,3 +46,10 @@ I used a [inclusive range](https://github.com/KyraTheDonkey/AdventOfCode2022/blo
 in a match statement, which is really cool. Trying to convert a character to a decimal ascii value
 isn't clear, but makes sense once you know it.
 The actual question wasn't too bad today, so pretty short.
+
+## Day 4
+Today's question again, just took a bit of problem solving, but wasn't too hard to code.
+This time I did use some structs to store my data, with some added 
+functions to better improve the readability of the code. My error messages
+also had a bit more information, and I read up a bit more about RangeInclusive (`..=`)
+to use in part 2 of the problem.
