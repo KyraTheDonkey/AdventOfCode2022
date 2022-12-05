@@ -7,19 +7,8 @@ pub fn run(input: &String, _part: i32) -> String {
         if i < 10 {
             continue;
         }
-        let action: Vec<&str> = split_input[i].split_ascii_whitespace().collect();
-        let number = action[1]
-            .trim()
-            .parse::<i32>()
-            .expect("Expected a number for how many crates to move");
-        let from = action[3]
-            .trim()
-            .parse::<usize>()
-            .expect("Expected a number for where to move the crate from");
-        let to = action[5]
-            .trim()
-            .parse::<usize>()
-            .expect("Expected a number for where to move the crate to");
+        let (number, from, to) = read_action(&split_input[i]);
+        
         for _i in 1..=number {
             let curr_crate = match crate_stack[from-1].pop() {
                 Some(char) => char,
@@ -62,4 +51,21 @@ pub fn print_crate_stack(crate_stack: &Vec<Vec<char>>) {
         }
         println!("{}", s)
     }
+}
+
+fn read_action(input: &str) -> (i32, usize, usize) {
+    let action: Vec<&str> = input.split_ascii_whitespace().collect();
+    let number = action[1]
+        .trim()
+        .parse::<i32>()
+        .expect("Expected a number for how many crates to move");
+    let from = action[3]
+        .trim()
+        .parse::<usize>()
+        .expect("Expected a number for where to move the crate from");
+    let to = action[5]
+        .trim()
+        .parse::<usize>()
+        .expect("Expected a number for where to move the crate to");
+    (number, from, to)
 }
