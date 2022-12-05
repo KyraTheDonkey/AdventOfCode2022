@@ -1,4 +1,4 @@
-pub fn run(input: &String, _part: i32) -> String {
+pub fn run(input: &String, part: i32) -> String {
     let mut crate_stack: Vec<Vec<char>> = create_crates();
     print_crate_stack(&crate_stack);
     println!();
@@ -7,18 +7,13 @@ pub fn run(input: &String, _part: i32) -> String {
         if i < 10 {
             continue;
         }
-        let (number, from, to) = read_action(&split_input[i]);
-        
-        for _i in 1..=number {
-            let curr_crate = match crate_stack[from-1].pop() {
-                Some(char) => char,
-                None => {
-                    print_crate_stack(&crate_stack);
-                    panic!("There wasn't a crate to pop from stack {} in iteration {}", from, i)
-                }
-            };
-            crate_stack[to-1].push(curr_crate);
+                
+        if part == 1 {
+            do_part_1(&mut crate_stack, &split_input[i], i);
+        } else {
+            do_part_2(&mut crate_stack, &split_input[i], i);
         }
+        
     }
     print_crate_stack(&crate_stack);
 
@@ -69,3 +64,36 @@ fn read_action(input: &str) -> (i32, usize, usize) {
         .expect("Expected a number for where to move the crate to");
     (number, from, to)
 }
+
+fn do_part_1(crate_stack: &mut Vec<Vec<char>>, action:&str, iteration: usize) {
+    let (number, from, to) = read_action(&action);
+    for _i in 1..=number {
+        let curr_crate = match crate_stack[from-1].pop() {
+            Some(char) => char,
+            None => {
+                print_crate_stack(&crate_stack);
+                panic!("There wasn't a crate to pop from stack {} in iteration {}", from, iteration)
+            }
+        };
+        crate_stack[to-1].push(curr_crate);
+    }
+}
+
+fn do_part_2(crate_stack: &mut Vec<Vec<char>>, action:&str, iteration: usize) {
+    let (number, from, to) = read_action(&action);
+    let mut s: String = String::from("");
+    for _i in 1..=number {
+        let curr_crate = match crate_stack[from-1].pop() {
+            Some(char) => char,
+            None => {
+                print_crate_stack(&crate_stack);
+                panic!("There wasn't a crate to pop from stack {} in iteration {}", from, iteration)
+            }
+        };
+        s.insert(0, curr_crate)
+    }
+    for char in s.chars() {
+        crate_stack[to-1].push(char);
+    }
+}
+    
