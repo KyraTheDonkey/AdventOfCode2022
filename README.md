@@ -53,3 +53,9 @@ This time I did use some structs to store my data, with some added
 functions to better improve the readability of the code. My error messages
 also had a bit more information, and I read up a bit more about RangeInclusive (`..=`)
 to use in part 2 of the problem.
+
+## Day 5
+The input file for this was annoying, so I had to directly create the stack of crates
+inside the code. Nested vectors are also a pain in the ass to work with, and it took me
+a ton of bugfixing to try and get the values out and make the right ones mutable
+etc etc blah blah blah. Definitely the longest day so far.
