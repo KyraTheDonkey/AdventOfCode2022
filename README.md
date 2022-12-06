@@ -59,3 +59,9 @@ The input file for this was annoying, so I had to directly create the stack of c
 inside the code. Nested vectors are also a pain in the ass to work with, and it took me
 a ton of bugfixing to try and get the values out and make the right ones mutable
 etc etc blah blah blah. Definitely the longest day so far.
+
+## Day 6
+Given that I know a little more about ranges, I thought "Hey, maybe I can use a range for a substring".
+I was immediately rewarded by not needing to import the substring module to do my work, and can use native Rust, 
+so I'm pretty happy about that. The coding was very simple, with just needing to make a single function to check for duplicate characters.
+Part 2 was surprisingly fast, as it required barely any rewriting, and I just needed to add a length and replaced 4 with `length`.
