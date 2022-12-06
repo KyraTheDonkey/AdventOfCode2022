@@ -1,13 +1,19 @@
-pub fn run(input: &String, _part: i32) -> i32 {
+pub fn run(input: &String, part: i32) -> i32 {
     let mut i: usize = 0;
-    while i < input.len() - 4 {
-        let s = &input[i..=i+3];
+    let length;
+    if part == 1 {
+        length = 4
+    } else {
+        length = 14
+    }
+    while i < input.len() - length {
+        let s = &input[i..i+length];
         if !check_duplicate(s) {
             break;
         }
         i += 1;
     }
-    return (i+4).try_into().unwrap();
+    return (i+length).try_into().unwrap();
 }
 
 fn check_duplicate(input: &str) -> bool {
