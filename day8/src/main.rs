@@ -7,8 +7,8 @@ fn main() {
     let config = parse_config(&args);
     let input = fs::read_to_string(config.input_path).expect("Expected to read the file");
 
-    let output = day8::run(&input, config.part);
-    println!("Answer is {}", output);
+    let (output_p1, output_p2) = day8::run(&input);
+    println!("Part 1's answer is {} and Part 2's answer is {}", output_p1, output_p2);
 }
 
 struct Config {

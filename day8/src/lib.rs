@@ -1,4 +1,4 @@
-pub fn run(input: &String, _part: i32) -> i32 {
+pub fn run(input: &String) -> (i32, i32) {
     let tree_array = read_input(input);
     print_trees(&tree_array);
 
@@ -10,7 +10,14 @@ pub fn run(input: &String, _part: i32) -> i32 {
             }
         }
     }
-    return visible_trees;
+    let mut highest_scenic_score = 0;
+    for row in 0..tree_array.len() {
+        for column in 0..tree_array[row].len() {
+            let scenic_score = get_scenic_score(&tree_array, row, column);
+            if scenic_score > highest_scenic_score { highest_scenic_score = scenic_score }
+        }
+    }
+    return (visible_trees, highest_scenic_score);
 }
 
 fn check_tree_visible(trees: &Vec<Vec<char>>, row: usize, column: usize) -> bool {
@@ -37,6 +44,7 @@ fn check_tree_visible(trees: &Vec<Vec<char>>, row: usize, column: usize) -> bool
     }
     if !blocked { visible = true }
 
+    // Check to the column above
     blocked = false;
     for r in 0..row {
         if trees[r][column] >= this_tree {
@@ -46,6 +54,7 @@ fn check_tree_visible(trees: &Vec<Vec<char>>, row: usize, column: usize) -> bool
     }
     if !blocked { visible = true }
 
+    // Check to the column below
     blocked = false;
     for r in row+1..trees.len() {
         if trees[r][column] >= this_tree {
@@ -56,6 +65,53 @@ fn check_tree_visible(trees: &Vec<Vec<char>>, row: usize, column: usize) -> bool
     if !blocked { visible = true }
 
     return visible;
+}
+
+fn get_scenic_score(trees: &Vec<Vec<char>>, row: usize, column: usize) -> i32 {
+    let this_tree = trees[row][column];
+
+    // Check in the row to the left
+    let mut left_view = 0;
+    let mut c_order = (0..column).collect::<Vec<usize>>();
+    c_order.reverse();
+    for c in c_order {
+        left_view = column - c;
+        if trees[row][c] >= this_tree {
+            break;
+        }
+    }
+    
+    // Check in the row to the right
+    let mut right_view = 0;
+    for c in column+1..trees[row].len() {
+        right_view = c - column;
+        if trees[row][c] >= this_tree { 
+            break;
+        }
+    }
+
+    // Check to the column above
+    let mut up_view = 0;
+    let mut r_order = (0..row).collect::<Vec<usize>>();
+    r_order.reverse();
+    for r in r_order {
+        up_view = row - r;
+        if trees[r][column] >= this_tree {
+            break;
+        }
+    }
+
+    // Check to the column below
+    let mut down_view = 0;
+    for r in row+1..trees.len() {
+        down_view = r - row;
+        if trees[r][column] >= this_tree {
+            break;
+        }
+    }
+
+    println!("({},{}): {} * {} * {} * {} = {}", row, column, left_view, right_view, up_view, down_view, left_view * right_view * up_view * down_view);
+    (left_view * right_view * up_view * down_view).try_into().unwrap()
 }
 
 fn read_input(input: &String) -> Vec<Vec<char>> {
