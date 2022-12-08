@@ -65,3 +65,9 @@ Given that I know a little more about ranges, I thought "Hey, maybe I can use a 
 I was immediately rewarded by not needing to import the substring module to do my work, and can use native Rust, 
 so I'm pretty happy about that. The coding was very simple, with just needing to make a single function to check for duplicate characters.
 Part 2 was surprisingly fast, as it required barely any rewriting, and I just needed to add a length and replaced 4 with `length`.
+
+## Day 7
+I really struggled with finding a sensible way to solve this. My time spent in other languages made it very hard to code this in
+rust and I decided with day 8 coming around I would tackle that first so I don't fall too far behind trying to solve this one.
+Perhaps I need to just assume certain things about the directory traversal and then try and deal with the string inputs recursively..?
+
