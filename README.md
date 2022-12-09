@@ -71,3 +71,11 @@ I really struggled with finding a sensible way to solve this. My time spent in o
 rust and I decided with day 8 coming around I would tackle that first so I don't fall too far behind trying to solve this one.
 Perhaps I need to just assume certain things about the directory traversal and then try and deal with the string inputs recursively..?
 
+## Day 8
+Not much of a tricky one, just some problem solving. Writing this too late, no idea if there was anything too bad.
+Just learnt that trying to iterate backwards through some numbers requires some finery.
+
+## Day 9
+The rewriting for part 2 was a bit tricky, since I encountered a problem trying to have a mutable and immutable borrow in the 
+same function call. Realised I can just clone my head for `move_tail` and pass that to the function, as it satisfies my requirements
+while not borrowing the actual entry again. Very nice!
