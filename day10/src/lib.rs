@@ -9,26 +9,36 @@ pub fn run(input: &String, _part: i32) {
     
     let mut current_time = 0;
     let mut current_x = 1;
+    let mut output_string = String::new();
     while cpu_info.len() > 0 {
         let info = match cpu_info.pop_front() {
             Some(info) => info,
             None => panic!("Ran out of enteries in cpu_info too quickly!"),
         };
         while current_time < info.time {
-            current_time += 1;
+            
+            // Part 1
             if current_time % 40 == 20 {
                 cpu_info_output.push(CpuInfo::new(current_time, current_x));
-            }      
+            }
+
+            // Part 2
+            if (current_x - ((current_time-1)%40)).abs() <= 1 { output_string.push('#') } else { output_string.push('.') };
+            if current_time % 40 == 0 {
+                output_string.push('\n');
+            }
+            current_time += 1;
         }
         current_x = info.x;
     }
     print_cpu_info(&cpu_info_output);
+    print!("{}", output_string);
 }
 
 fn read_cpu_info(input: &String) -> VecDeque<CpuInfo> {
     let split_input: Vec<&str> = input.split("\n").collect();
 
-    let mut current_time = 0;
+    let mut current_time = 1;
     let mut current_x = 1;
     let mut cpu_info: VecDeque<CpuInfo> = VecDeque::new();
     for i in 0..split_input.len() {
