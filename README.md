@@ -79,3 +79,8 @@ Just learnt that trying to iterate backwards through some numbers requires some 
 The rewriting for part 2 was a bit tricky, since I encountered a problem trying to have a mutable and immutable borrow in the 
 same function call. Realised I can just clone my head for `move_tail` and pass that to the function, as it satisfies my requirements
 while not borrowing the actual entry again. Very nice!
+
+## Day 10
+At this point, I'm one day behind, since I have loadshedding, and I went to a games afternoon on the 10th.
+Interesting puzzle. Nothing interesting in Rust, but I ended up having a really jank method for Part 2. Definitely not
+a well thought out solution, or even well timed. But both of the parts work, so I'm fine XD
