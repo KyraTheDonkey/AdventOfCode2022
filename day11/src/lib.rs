@@ -7,14 +7,14 @@ pub fn run(input: &String, _part: i32) {
     let mut m5: Vec<i64> = vec![57, 91, 65];
     let mut m6: Vec<i64> = vec![67, 91, 84, 78, 60, 69, 99, 83];
     let mut m7: Vec<i64> = vec![58, 78, 69, 65];
-    let mut monkey_count = [0, 0, 0, 0, 0, 0, 0, 0];
+    let mut monkey_count: [i64; 8] = [0, 0, 0, 0, 0, 0, 0, 0];
 
-    for _i in 0..20 {
+    for _i in 0..10000 {
         // Monkey 0
         for _j in 0..m0.len() {
             let mut item = m0.pop().expect("Should have had an item");
             item = item * 11;
-            item = item / 3;
+            item = item % (2*3*5*7*11*13*17*19);
             if item % 7 == 0 {
                 m6.push(item);
             } else {
@@ -27,7 +27,7 @@ pub fn run(input: &String, _part: i32) {
         for _j in 0..m1.len() {
             let mut item = m1.pop().expect("Should have had an item");
             item = item + 1;
-            item = item / 3;
+            item = item % (2*3*5*7*11*13*17*19);
             if item % 11 == 0 {
                 m5.push(item);
             } else {
@@ -40,7 +40,7 @@ pub fn run(input: &String, _part: i32) {
         for _j in 0..m2.len() {
             let mut item = m2.pop().expect("Should have had an item");
             item = item * 7;
-            item = item / 3;
+            item = item % (2*3*5*7*11*13*17*19);
             if item % 13 == 0 {
                 m4.push(item);
             } else {
@@ -53,7 +53,7 @@ pub fn run(input: &String, _part: i32) {
         for _j in 0..m3.len() {
             let mut item = m3.pop().expect("Should have had an item");
             item = item + 3;
-            item = item / 3;
+            item = item % (2*3*5*7*11*13*17*19);
             if item % 3 == 0 {
                 m1.push(item);
             } else {
@@ -66,7 +66,7 @@ pub fn run(input: &String, _part: i32) {
         for _j in 0..m4.len() {
             let mut item = m4.pop().expect("Should have had an item");
             item = item + 6;
-            item = item / 3;
+            item = item % (2*3*5*7*11*13*17*19);
             if item % 17 == 0 {
                 m3.push(item);
             } else {
@@ -79,7 +79,7 @@ pub fn run(input: &String, _part: i32) {
         for _j in 0..m5.len() {
             let mut item = m5.pop().expect("Should have had an item");
             item = item + 5;
-            item = item / 3;
+            item = item % (2*3*5*7*11*13*17*19);
             if item % 2 == 0 {
                 m0.push(item);
             } else {
@@ -92,7 +92,7 @@ pub fn run(input: &String, _part: i32) {
         for _j in 0..m6.len() {
             let mut item = m6.pop().expect("Should have had an item");
             item = item * item;
-            item = item / 3;
+            item = item % (2*3*5*7*11*13*17*19);
             if item % 5 == 0 {
                 m2.push(item);
             } else {
@@ -105,7 +105,7 @@ pub fn run(input: &String, _part: i32) {
         for _j in 0..m7.len() {
             let mut item = m7.pop().expect("Should have had an item");
             item = item + 7;
-            item = item / 3;
+            item = item % (2*3*5*7*11*13*17*19);
             if item % 19 == 0 {
                 m5.push(item);
             } else {
